@@ -1,0 +1,58 @@
+﻿
+
+@{
+    ViewBag.Title = "Topic";
+}
+<head>
+
+</head>
+<h2>Topic</h2>
+
+<table id="TopicMaster" class="display" cell-border compact stripe">
+    <thead>
+        <tr>
+            <th> TopicId             </th>
+            <th> TopicCode           </th>
+            <th> TopicName           </th>
+            <th> CreatedDate         </th>
+            <th> CreatedBy           </th>
+            <th> LastModifiedBy       </th>
+            <th> LastModifieddate    </th>
+
+        </tr>
+
+    </thead>
+
+</table>
+
+<input type="button" name="btnApiSubmit" value="ADD TOPIC" onclick="return insertValues()" />
+@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: 'http://localhost:8080/api/apitopicmaster/',
+                type: "GET",
+                dataType: 'json',
+                success: function (data) {
+                    $('#TopicMaster').DataTable({
+                        data: data,
+                        columns: [
+                            { 'data': 'TopicId' },
+                            { 'data': 'TopicCode' },
+                            { 'data': 'TopicName' },
+                            { 'data': 'CreatedDate' },
+                            { 'data': 'CreatedBy' },
+                            { 'data': 'LastModifiedBy' },
+                            { 'data': 'LastModifieddate' },
+                        ]
+                    });
+                }
+            });
+
+        });
+    </script>
+}

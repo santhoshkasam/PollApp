@@ -19,11 +19,16 @@ namespace PollingApp.Repositories
       : base("name=PollingAppConnection")
     {
       AppRoles.AsNoTracking();
+      TopicMasters.AsNoTracking();
     }
     public DbSet<AppRole> AppRoles { get; set; }
+    public DbSet<TopicMaster> TopicMasters { get; set; }
+
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
       modelBuilder.Configurations.Add(new AppRoleMap());
+      modelBuilder.Configurations.Add(new TopicMasterMap());
+
     }
   }
 }
